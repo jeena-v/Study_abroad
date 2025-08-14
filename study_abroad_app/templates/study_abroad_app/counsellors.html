@@ -1,0 +1,53 @@
+{% extends 'study_abroad_app/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+
+<style>
+/* Basic page styles */
+body { font-family: 'Poppins', sans-serif; background: #f8f8f8; margin: 0; padding: 0; }
+.counsellor_page { padding: 80px 0; background: url("{% static 'img/img7.jpg' %}") no-repeat center center; background-size: cover; position: relative; z-index: 1; }
+.counsellor_page::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: -1; }
+.counsellor_container { max-width: 600px; background: #fff; padding: 40px 30px; margin: 0 auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+.counsellor_form { display: grid; gap: 15px; text-align: left; }
+.counsellor_form input, .counsellor_form select, .counsellor_form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+.counsellor_form button { width: 100%; background: #ff6600; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 25px; cursor: pointer; margin-top: 10px; }
+.counsellor_form button:hover { background: #e65c00; }
+.success_message { color: green; font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 15px; }
+
+/* Choices.js styling */
+.choices__list--dropdown, .choices__list[role="listbox"] { max-height: 180px; overflow: auto; }
+.choices { width: 100%; }
+.choices__inner { min-height: 44px; border-radius: 6px; padding: 6px 12px; border: 1px solid #ccc; }
+</style>
+
+<section class="counsellor_page">
+  <div class="counsellor_container">
+    <h2>Talk to Our Counsellors</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="success_message">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="counsellor_form">
+      {% csrf_token %}
+      {{ form.first_name.label_tag }} {{ form.first_name }}
+      {{ form.last_name.label_tag }} {{ form.last_name }}
+      {{ form.email.label_tag }} {{ form.email }}
+      {{ form.phone.label_tag }} {{ form.phone }}
+      {{ form.city.label_tag }} {{ form.city }}
+      {{ form.state.label_tag }} {{ form.state }}
+      {{ form.target_country.label_tag }} {{ form.target_country }}
+      {{ form.target_intake.label_tag }} {{ form.target_intake }}
+      {{ form.message.label_tag }} {{ form.message }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+{% endblock %}

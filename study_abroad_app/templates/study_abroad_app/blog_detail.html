@@ -1,0 +1,36 @@
+{% extends 'study_abroad_app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="blog_detail_area section_gap">
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Center the content -->
+      <!-- Blog Content (Full width or centered) -->
+      <div class="col-lg-12"> <!-- Adjusted width -->
+        <div class="single-post">
+          <!-- Blog Image -->
+<div class="feature-img text-center">
+  {% if post.image %}
+    <img class="img-fluid d-inline-block" src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width:100%; height:auto; max-height:400px;">
+  {% else %}
+    <img class="img-fluid d-inline-block" src="{% static 'img/blog/default.jpg' %}" alt="Default Image" style="max-width:100%; height:auto; max-height:400px;">
+  {% endif %}
+</div>
+
+
+
+          <!-- Blog Meta Info -->
+          <div class="blog_details">
+            <h2>{{ post.title }}</h2>
+
+            <!-- Blog Body Content -->
+            <p>{{ post.content|linebreaks }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,374 @@
+{% extends 'study_abroad_app/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  /* Buttons */
+  .primary-btn {
+    background-color: #ff6600 !important;
+    color: #fff !important;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  .primary-btn:hover {
+    background-color: #e65500 !important;
+    color: #fff !important;
+  }
+
+  /* General section gap */
+  .section-gap > * + * {
+    margin-top: 40px;
+  }
+
+  /* Headings */
+  h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: #002347;
+    margin-bottom: 15px;
+  }
+
+  /* Feature items */
+  .feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .highlight-icon {
+    font-size: 28px;
+    color: #ff6600;
+    margin-right: 12px;
+  }
+  .feature-text {
+    font-weight: 500;
+  }
+
+  /* Stats boxes */
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .stat-box {
+    text-align: center;
+    padding: 15px 25px;
+    background: #fef4e5;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ff6600;
+  }
+  .stat-label {
+    margin-top: 6px;
+    font-weight: 600;
+    color: #444;
+  }
+
+  /* Team member styling */
+  .team-member {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .team-member img {
+    border-radius: 10px;
+    max-width: 220px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .team-member img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.5);
+  }
+  .team-member h5 {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #002347;
+  }
+  .team-member p {
+    font-style: italic;
+    color: #555;
+  }
+
+  /* Testimonials */
+  .testimonial {
+    background: #fff3e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-style: italic;
+    color: #333;
+  }
+  .testimonial-author {
+    margin-top: 12px;
+    font-weight: 600;
+    color: #ff6600;
+  }
+
+  /* Complementary Counselling Session Box */
+  .counselling_session_area {
+    display: flex;
+    justify-content: center;
+    margin: 60px auto;
+  }
+
+  .counselling_box {
+    background: #ff6600;
+    padding: 60px 40px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .counselling_box h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .enquire_btn {
+    background: #fff;
+    color: #ff6600;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .enquire_btn:hover {
+    background: #f2f2f2;
+    color: #e65c00;
+  }
+
+  /* Responsive Counselling Box */
+  @media (max-width: 600px) {
+    .counselling_box {
+      flex-direction: column;
+      text-align: center;
+      border-radius: 20px;
+    }
+    .counselling_box h2 {
+      white-space: normal;
+    }
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .modal_content {
+    background: #fff;
+    margin: 8% auto;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  .modal_content h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #002347;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover {
+    color: #ff6600;
+  }
+  .enquire_form input,
+  .enquire_form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .submit_btn {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  .submit_btn:hover {
+    background: #e65c00;
+  }
+</style>
+
+
+
+<div style="height: 180px;"></div>
+
+<section class="section-gap container">
+  <h2>About Royal Pearl Study Abroad</h2>
+  <p>
+    Royal Pearl Study Abroad was created to help students navigate the complex journey of pursuing education overseas.
+    We believe every student deserves tailored guidance and dedicated support — from choosing the right course and university to securing visas and scholarships.
+    Our team of experienced counselors is committed to making your dreams a reality with trust, transparency, and professionalism.
+  </p>
+
+  <h3>Our Mission</h3>
+  <p>
+    To empower students by providing expert guidance and personalized support throughout their international education journey.
+  </p>
+
+  <h3>Our Vision</h3>
+  <p>
+    To be the most trusted and successful education consultancy recognized globally for student satisfaction and outcomes.
+  </p>
+
+  <h3>Why Choose Us?</h3>
+  <div class="feature-item">
+    <span class="highlight-icon flaticon-student"></span>
+    <span class="feature-text">Personalized Counseling tailored to your unique academic goals.</span>
+  </div>
+  <div class="feature-item">
+    <span class="highlight-icon flaticon-book"></span>
+    <span class="feature-text">Extensive Scholarship Support to reduce your financial burden.</span>
+  </div>
+  <div class="feature-item">
+    <span class="highlight-icon flaticon-earth"></span>
+    <span class="feature-text">Strong Global Network of partner universities worldwide.</span>
+  </div>
+  <div class="feature-item">
+    <span class="highlight-icon flaticon-plane"></span>
+    <span class="feature-text">Comprehensive Visa & Travel Assistance for a stress-free process.</span>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-box">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Students Placed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Countries Covered</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">50+</div>
+      <div class="stat-label">Partner Universities</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">95%</div>
+      <div class="stat-label">Visa Success Rate</div>
+    </div>
+  </div>
+
+  <h3 class="mt-5">Meet Our Team</h3>
+  <div class="row">
+    <div class="col-md-4 team-member">
+      <img src="{% static 'img/team-1.jpg' %}" alt="Aisha Al-Hashmi" />
+      <h5>Aisha Al-Hashmi</h5>
+      <p>Senior Education Counselor</p>
+    </div>
+    <div class="col-md-4 team-member">
+      <img src="{% static 'img/team-2.jpg' %}" alt="Kamal Nair" />
+      <h5>Kamal Nair</h5>
+      <p>Visa & Documentation Lead</p>
+    </div>
+    <div class="col-md-4 team-member">
+      <img src="{% static 'img/team-3.jpg' %}" alt="Maya Thomas" />
+      <h5>Maya Thomas</h5>
+      <p>Scholarship Advisor</p>
+    </div>
+  </div>
+
+  <h3 class="mt-5">Student Testimonials</h3>
+  <div class="testimonial">
+    <p>“Royal Pearl Study Abroad helped me get a 50% scholarship for my master's program in Canada. The support during visa application was excellent!”</p>
+    <div class="testimonial-author">— Ananya R., MSc Student, Toronto</div>
+  </div>
+  <div class="testimonial">
+    <p>“From the beginning to the end, the team guided me patiently and professionally. I’m now studying in the UK and couldn’t be happier.”</p>
+    <div class="testimonial-author">— Mohammed S., BSc Student, UK</div>
+  </div>
+</section>
+
+<section class="counselling_session_area">
+  <div class="counselling_box">
+    <h2>Avail A Complementary Counselling Session</h2>
+    <a href="#" class="enquire_btn" id="openPopup">Enquire Now</a>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="enquireModal" class="modal">
+  <div class="modal_content">
+    <span class="close" id="closePopup">&times;</span>
+    <h3>Book Your Free Counselling Session</h3>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    <form method="POST" action="{% url 'counselling_popup' %}" class="enquire_form">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="phone" placeholder="Your Phone" required>
+      <textarea name="message" placeholder="Your Message" rows="3" required></textarea>
+      <button type="submit" class="submit_btn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.getElementById('openPopup');
+    const closeBtn = document.getElementById('closePopup');
+    const modal = document.getElementById('enquireModal');
+
+    if (openBtn && closeBtn && modal) {
+      openBtn.addEventListener('click', e => {
+        e.preventDefault();
+        modal.style.display = 'block';
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+{% endblock %}
