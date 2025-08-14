@@ -31,6 +31,13 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'study_abroad_app/contact.html', {'form': form})
+from django.shortcuts import redirect, render
+from django.core.mail import send_mail
+from django.contrib import messages
+from .forms import CounsellorMessageForm, CounsellingPopupForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 def counsellor_form(request):
     if request.method == 'POST':
@@ -38,10 +45,11 @@ def counsellor_form(request):
         if form.is_valid():
             instance = form.save()
             
-            # Send email to admin
-            subject = 'New Counsellor Enquiry'
-            admin_email = 'youradmin@example.com'
-            message = f"""
+            # Send email to admin safely
+            try:
+                subject = 'New Counsellor Enquiry'
+                admin_email = 'youradmin@example.com'
+                message = f"""
 Name: {instance.first_name} {instance.last_name}
 Email: {instance.email}
 Phone: {instance.phone}
@@ -50,8 +58,11 @@ State: {instance.state}
 Target Country: {instance.target_country}
 Target Intake: {instance.target_intake}
 Message: {instance.message}
-            """
-            send_mail(subject, message, 'noreply@yourdomain.com', [admin_email])
+                """
+                send_mail(subject, message, 'noreply@yourdomain.com', [admin_email])
+            except Exception as e:
+                logger.exception("Counsellor email sending failed")
+                # optional: you can inform the admin via DB/log
 
             messages.success(request, '✅ Thank you! Our counsellors will contact you soon.')
             return redirect('counsellors')
@@ -60,11 +71,6 @@ Message: {instance.message}
 
     return render(request, 'study_abroad_app/counsellors.html', {'form': form})
 
-from django.shortcuts import redirect
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.contrib import messages
-from .forms import CounsellingPopupForm
 
 def counselling_popup(request):
     if request.method == 'POST':
@@ -72,21 +78,23 @@ def counselling_popup(request):
         if form.is_valid():
             instance = form.save()
 
-            # Send email to admin
-            subject = 'New Popup Counselling Request'
-            message = render_to_string('study_abroad_app/contactmail.html', {
-                'name': instance.name,
-                'phoneno': instance.phone,
-                'email': instance.email,
-                'message': instance.message,
-            })
-            send_mail(subject, message, 'noreply@gocosys.com', ['jeenav.valsan@gmail.com'])
+            try:
+                subject = 'New Popup Counselling Request'
+                message = render_to_string('study_abroad_app/contactmail.html', {
+                    'name': instance.name,
+                    'phoneno': instance.phone,
+                    'email': instance.email,
+                    'message': instance.message,
+                })
+                send_mail(subject, message, 'noreply@gocosys.com', ['jeenav.valsan@gmail.com'])
+            except Exception as e:
+                logger.exception("Popup counselling email failed")
 
             messages.success(request, '✅ Thank you! We will contact you shortly.')
-            return redirect('index')  # or any page you want to reload
+            return redirect('index')
+
     return redirect('index')
 
-   
 
 from django.shortcuts import render, get_object_or_404
 from .models import AboutPage, BlogPost, BlogCategory, CountryPage,  Service

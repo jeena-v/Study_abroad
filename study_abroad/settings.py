@@ -136,10 +136,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = '0895c41bb5cf12'
-EMAIL_HOST_PASSWORD = 'f6629a5473fd04'
-EMAIL_PORT = 587  # ✅ Use 587 for TLS
-EMAIL_USE_TLS = True  # ✅ Enable TLS
-EMAIL_USE_SSL = False  # ❌ Do not enable SSL when TLS is on
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'jeenav.valsan@gmail.com'         # your Gmail
+EMAIL_HOST_PASSWORD = 'hdtfmtwhwfatuwys'       # app password (not your Gmail password) 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
