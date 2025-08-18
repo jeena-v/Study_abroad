@@ -41,44 +41,71 @@ class BlogPost(models.Model):
         return self.title
 
 from django.db import models
-
 class CounsellorMessage(models.Model):
     STATE_CHOICES = [
-        ('Andhra Pradesh', 'Andhra Pradesh'),        
+        ('', 'Select State'),  # 👈 Added placeholder
+        ('Andhra Pradesh', 'Andhra Pradesh'),
+        ('Arunachal Pradesh', 'Arunachal Pradesh'),
+        ('Assam', 'Assam'),
+        ('Bihar', 'Bihar'),
+        ('Chhattisgarh', 'Chhattisgarh'),
         ('Goa', 'Goa'),
         ('Gujarat', 'Gujarat'),
-        ('Haryana', 'Haryana'),        
+        ('Haryana', 'Haryana'),
+        ('Himachal Pradesh', 'Himachal Pradesh'),
         ('Jharkhand', 'Jharkhand'),
         ('Karnataka', 'Karnataka'),
         ('Kerala', 'Kerala'),
         ('Madhya Pradesh', 'Madhya Pradesh'),
-        ('Maharashtra', 'Maharashtra'),                
-        ('Odisha', 'Odisha'),                        
+        ('Maharashtra', 'Maharashtra'),
+        ('Manipur', 'Manipur'),
+        ('Meghalaya', 'Meghalaya'),
+        ('Mizoram', 'Mizoram'),
+        ('Nagaland', 'Nagaland'),
+        ('Odisha', 'Odisha'),
+        ('Punjab', 'Punjab'),
+        ('Rajasthan', 'Rajasthan'),
+        ('Sikkim', 'Sikkim'),
         ('Tamil Nadu', 'Tamil Nadu'),
-        ('Telangana', 'Telangana'),        
-        
-        
-        
+        ('Telangana', 'Telangana'),
+        ('Tripura', 'Tripura'),
+        ('Uttar Pradesh', 'Uttar Pradesh'),
+        ('Uttarakhand', 'Uttarakhand'),
+        ('West Bengal', 'West Bengal'),
+        # Union Territories
+        ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
+        ('Chandigarh', 'Chandigarh'),
+        ('Dadra and Nagar Haveli and Daman and Diu', 'Dadra and Nagar Haveli and Daman and Diu'),
+        ('Delhi', 'Delhi'),
+        ('Jammu and Kashmir', 'Jammu and Kashmir'),
+        ('Ladakh', 'Ladakh'),
+        ('Lakshadweep', 'Lakshadweep'),
+        ('Puducherry', 'Puducherry'),
     ]
 
     COUNTRY_CHOICES = [
+        ('', 'Select Country'),  # 👈 Added placeholder
         ('USA', 'USA'),
         ('UK', 'UK'),
         ('Canada', 'Canada'),
         ('Australia', 'Australia'),
         ('France', 'France'),
-        ('Irland', 'Irland'),
+        ('Ireland', 'Ireland'),
         ('Germany', 'Germany'),
         ('Newzealand', 'Newzealand'),
+        ('UAE', 'UAE'),
+        ('Other', 'Other'),
     ]
 
     INTAKE_CHOICES = [
+        ('', 'Select Intake'),  # 👈 Added placeholder
         ('Jan 2025', 'Jan 2025'),
         ('May 2025', 'May 2025'),
         ('Sep 2025', 'Sep 2025'),
         ('Jan 2026', 'Jan 2026'),
         ('May 2026', 'May 2026'),
         ('Sep 2026', 'Sep 2026'),
+        ('Other', 'Other'),
     ]
 
     first_name = models.CharField(max_length=100)
@@ -86,9 +113,9 @@ class CounsellorMessage(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100, choices=STATE_CHOICES)
-    target_country = models.CharField(max_length=100, choices=COUNTRY_CHOICES)
-    target_intake = models.CharField(max_length=100, choices=INTAKE_CHOICES)
+    state = models.CharField(max_length=100, choices=STATE_CHOICES, blank=True)
+    target_country = models.CharField(max_length=100, choices=COUNTRY_CHOICES, blank=True)
+    target_intake = models.CharField(max_length=100, choices=INTAKE_CHOICES, blank=True)
     message = models.TextField(blank=True, null=True)
 
     def __str__(self):

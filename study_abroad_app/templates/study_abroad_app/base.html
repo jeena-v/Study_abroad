@@ -71,11 +71,44 @@
   float: right;
   margin-left: 5px;
 }
+
 /* Highlight dropdown items on hover */
-.dropdown-menu .dropdown-item:hover {
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .nav-link:hover {
   background-color: #fdc632; /* Yellow (Bootstrap warning color) */
   color: #000; /* Black text for contrast */
 }
+
+/* ===== Uniform dropdown styling for Services & Countries ===== */
+.navbar-nav .dropdown-menu,
+.navbar-nav .dropdown-submenu .dropdown-menu {
+  min-width: 220px;      /* uniform width */
+}
+
+.navbar-nav .dropdown-menu .dropdown-item,
+.navbar-nav .dropdown-menu .nav-link {
+  font-size: 15px;       /* same font size */
+  white-space: nowrap;   /* keep text in one line */
+  padding: 8px 15px;     /* same padding */
+}
+/* Add line separator between dropdown items */
+/* Add line separator between all dropdown items */
+.navbar-nav .dropdown-menu .dropdown-item {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 15px;
+  font-size: 18px;
+}
+
+/* Remove border for last visible item in each dropdown */
+.navbar-nav .dropdown-menu > li:last-child > .dropdown-item {
+  border-bottom: none;
+}
+
+/* Optional: remove border for nested submenu last items */
+.navbar-nav .dropdown-submenu .dropdown-menu > li:last-child > .dropdown-item {
+  border-bottom: none;
+}
+
 /* WhatsApp Floating Button */
 
   #whatsapp-button {
@@ -117,6 +150,29 @@ footer.footer-area {
   margin-top: 10px !important;  /* Reduce bottom margin */
   padding-top: 10px; /* optional */
   padding-bottom: 5px; /* optional */
+}
+.footer-area .footer-links {
+  padding: 0;
+  margin: 0;
+}
+
+.footer-area .footer-links li {
+  list-style: none;
+  margin-bottom: 5px; /* spacing between links */
+}
+
+.footer-area .footer-links li a {
+  color: white;
+  text-decoration: none;
+  display: inline-block; /* ensures proper alignment */
+}
+
+.footer-area .footer-links li a:hover {
+  color: #fdc632;
+}
+.quick-links-heading {
+    text-align: center;  /* keep it centered overall */
+    margin-left: -60px;  /* nudge slightly left */
 }
 
 
@@ -239,58 +295,63 @@ footer.footer-area {
     {% endblock %}
      <!-- Start Footer -->
 
-     <footer class="footer-area section_gap">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 single-footer-widget">
-            <a class="navbar-brand logo_h" href="{% url 'index' %}"
-              ><img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad"
-            /></a>
-            <p>your trusted partner in achieving global education goals!</p>            
-          </div>         
-          <div class="col-lg-2 col-md-6 single-footer-widget">
-               <h4></h4>
-            <ul>
-              <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'about' %}">About</a></li>
-              
-              
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-6 single-footer-widget">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="{% url 'blog' %}">Blog</a></li>
-              <li><a href="{% url 'index' %}">Services</a></li>
-              
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-6 single-footer-widget">
-               <h4></h4>
-            <ul>
-             <li><a href="{% url 'index' %}">Countries</a></li>
-              <li><a href="{% url 'contact' %}">Contact</a></li>
-            </ul>
-          </div>          
-        </div>
-        <div class="row footer-bottom d-flex justify-content-between">
-          <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://gocosys.com" target="_blank"> Gocosys&jeena</a>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
-          <div class="col-lg-4 col-sm-12 footer-social">
-  <a href="https://www.facebook.com/profile.php?id=61578094118441&mibextid=qi2Omg&rdid=IUovFJm0MoxCXnTk&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AeVvApedY%2F%3Fmibextid%3Dqi2Omg#"><i class="ti-facebook"></i></a>
-<a href="https://www.royalpearltravels.com" target="_blank"><i class="ti-dribbble"></i></a>
-  <a href="https://www.instagram.com/royalpearl_travels?utm_source=qr&igsh=MW03cHllZWwyNzcyeg%3D%3D">
-    <i class="ti-instagram"></i>
-  </a>
+   <footer class="footer-area section_gap">
+  <div class="container">
+    <div class="row">
+      <!-- Logo & tagline -->
+      <div class="col-lg-4 col-md-6 single-footer-widget">
+        <a class="navbar-brand logo_h" href="{% url 'index' %}">
+          <img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad" />
+        </a>
+        <p>Your trusted partner in achieving global education goals!</p>            
+      </div>         
+
+      <!-- Quick Links -->
+      <!-- Quick Links -->
+<div class="col-lg-6 col-md-6 ">
+  <h4 class="mb-3 quick-links-heading">Quick Links</h4>
+  <div class="row">
+    <div class="col-4">
+      <ul class="footer-links list-unstyled">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <ul class="footer-links list-unstyled">
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'index' %}">Services</a></li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <ul class="footer-links list-unstyled">
+        <li><a href="{% url 'index' %}">Countries</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 
-        </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="row footer-bottom d-flex justify-content-between">
+      <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
+        All rights reserved | This site is made with <i class="ti-heart" aria-hidden="true"></i> 
+        by <a href="https://gocosys.com" target="_blank"> Gocosys &amp; Jeena</a>
+      </p>
+
+      <div class="col-lg-4 col-sm-12 footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61578094118441&mibextid=qi2Omg"><i class="ti-facebook"></i></a>
+        <a href="https://www.royalpearltravels.com" target="_blank"><i class="ti-dribbble"></i></a>
+        <a href="https://www.instagram.com/royalpearl_travels"><i class="ti-instagram"></i></a>
       </div>
-    </footer>
-    <!--================ End footer Area  =================-->
+    </div>
+  </div>
+</footer>
+
+    <!--================ End footer Area  end=================-->
     <!-- WhatsApp -->
 <a href="https://wa.me/918807440944" target="_blank" id="whatsapp-button" title="Chat with us on WhatsApp">
   <i class="fab fa-whatsapp"></i>
