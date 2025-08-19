@@ -3,93 +3,123 @@
 {% block content %}
 
 <style>
-/* ✅ Light background info box styles */
+/* ================= INFO BOXES ================= */
 .info-box {
   background: #f9f9f9;
-  padding: 25px 30px;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.4); /* stronger orange */
-  transition: all 0.3s ease;
+  padding: 28px 35px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 3px solid rgba(255, 102, 0, 0.4); /* ✅ original orange border */
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .info-box:hover {
-  box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.5),
-              0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.08), 0 0 0 4px rgba(255,102,0,0.5);
   transform: translateY(-3px);
 }
 
 
+.info-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 0;
+  height: 100%;
+  background: rgba(255, 102, 0, 0.1);
+  transform: skewX(-25deg);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.info-box:hover::before {
+  width: 200%;
+}
+
 .info-box h2,
 .info-box h3 {
   color: #002347;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+  font-size: 22px;
 }
 
 .info-box p {
   color: #444;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 2;
 }
 
-
-  /* ✅ Complementary Counselling Session Box */
+/* ================= COUNSELLING BOX ================= */
 .counselling_session_area {
   display: flex;
   justify-content: center;
-  margin: 60px auto;
+  margin: 80px auto;
 }
 
 .counselling_box {
-  background: #ff6600; /* Orange background */
-  padding: 60px 40px;
-  border-radius: 25px; /* ✅ Perfect rounded pill shape */
+  background: linear-gradient(90deg, #ff6600, #ff8533);
+  padding: 60px 50px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 25px;
   width: 100%;
-  max-width: 1000px; /* ✅ Increase this to make it wider */
+  max-width: 1000px;
+  transition: all 0.4s ease;
+}
+
+.counselling_box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
 }
 
 .counselling_box h2 {
   color: #fff;
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   margin: 0;
-  flex: 1; /* ✅ Ensures text takes space properly */
-  white-space: nowrap; /* ✅ Keeps it in one line */
+  flex: 1;
+  white-space: nowrap;
 }
 
 .enquire_btn {
   background: #fff;
   color: #ff6600;
-  padding: 8px 18px;
-  border-radius: 20px;
+  padding: 10px 25px;
+  border-radius: 25px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .enquire_btn:hover {
-  background: #f2f2f2;
+  background: #ffe6cc;
   color: #e65c00;
 }
 
-/* ✅ Responsive (button below on mobile) */
+/* Responsive */
 @media (max-width: 600px) {
   .counselling_box {
     flex-direction: column;
     text-align: center;
-    border-radius: 20px;
+    padding: 50px 20px;
   }
   .counselling_box h2 {
     white-space: normal;
+    margin-bottom: 20px;
   }
 }
 
-/* ✅ POPUP MODAL STYLES */
+/* ================= POPUP MODAL ================= */
 .modal {
   display: none;
   position: fixed;
@@ -104,17 +134,17 @@
 
 .modal_content {
   background: #fff;
-  margin: 8% auto;
+  margin: 10% auto;
   padding: 30px;
-  border-radius: 8px;
-  max-width: 400px;
+  border-radius: 12px;
+  max-width: 420px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 .modal_content h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 25px;
   color: #002347;
 }
 
@@ -130,21 +160,20 @@
   color: #ff6600;
 }
 
-/* ✅ FORM STYLES */
 .enquire_form input,
 .enquire_form textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
 .submit_btn {
   background: #ff6600;
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -155,10 +184,59 @@
 .submit_btn:hover {
   background: #e65c00;
 }
+
+/* ================= BANNER SECTION ================= */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background: url("{% static 'img/org6.jpg' %}") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay {
+  background: rgb(83 83 83 / 6%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay h1 {
+  color: #fff;
+  font-size: 38px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  margin-top: 40px;
+}
+
+/* ================= EXTRA ENHANCEMENTS ================= */
+
+/* Add subtle icon before each info box title */
+.info-box h2::before {
+  content: "★";
+  margin-right: 10px;
+  color: #ff6600;
+}
+
+/* Smooth transition for all hover effects */
+* {
+  transition: all 0.3s ease;
+}
+
 </style>
- <div style="height: 150px;"></div>
+<!-- ✅ Banner Section -->
+<section class="banner">
+  <div class="banner-overlay">
+    <h1>{{ country.name }}</h1>
+  </div>
+</section>
  <section class="container section-gap">
-      <h1 style="text-align: center;">{{ country.name }}</h1>
+      <h1></h1>
   <div class="info-box">
     <h2>About</h2>
     <p>{{ country.about_text|linebreaks }}</p>
