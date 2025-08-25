@@ -2,409 +2,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" />
-    <title>Royal Pearl Study Abroad </title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'vendors/nice-select/css/nice-select.css' %}" />
-    <!-- main css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    
-    <link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<style>
-  footer.footer-area {
-    color: white !important;
-  }
-  footer.footer-area h4,
-  footer.footer-area p,
-  footer.footer-area ul li a,
-  footer.footer-area .footer-text,
-  footer.footer-area .footer-social i {
-    color: white !important;
-  }
-  footer.footer-area ul li a:hover {
-    color: white !important;
-  }
-</style>
+  <!-- ========== META TAGS ========== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <style>
-/* Custom multi-level dropdown styling */
-.dropdown-submenu {
-  position: relative;
-}
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" href="{% static 'img/banner/logo4.jpg' %}" type="image/png" />
 
-.dropdown-submenu > .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-  display: none;
-}
+  <!-- ========== TITLE ========== -->
+  <title>Royal Pearl Study Abroad</title>
 
-.dropdown-submenu:hover > .dropdown-menu {
-  display: block;
-}
+  <!-- ========== CSS FILES ========== -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/nice-select/css/nice-select.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
-/* Remove default Bootstrap arrow only on top-level dropdown toggles */
-.navbar-nav > .dropdown > .dropdown-toggle::after {
-  display: none;
-}
+  <!-- ========== CUSTOM STYLES ========== -->
+  <style>
+    /* -------- Footer Colors -------- */
+    footer.footer-area {
+      color: white !important;
+    }
+    footer.footer-area h4,
+    footer.footer-area p,
+    footer.footer-area ul li a,
+    footer.footer-area .footer-text,
+    footer.footer-area .footer-social i {
+      color: white !important;
+    }
+    footer.footer-area ul li a:hover {
+      color: white !important;
+    }
 
-/* Remove Bootstrap arrow on submenu toggles */
-.dropdown-submenu > a.dropdown-toggle::after {
-  display: none;
-}
+    /* -------- Dropdown Menu Styling -------- */
+    .dropdown-submenu {
+      position: relative;
+    }
+    .dropdown-submenu > .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -1px;
+      display: none;
+    }
+    .dropdown-submenu:hover > .dropdown-menu {
+      display: block;
+    }
+    /* Remove default arrows */
+    .navbar-nav > .dropdown > .dropdown-toggle::after,
+    .dropdown-submenu > a.dropdown-toggle::after {
+      display: none;
+    }
+    /* Custom arrow for submenus */
+    .dropdown-submenu > a::after {
+      content: " ▸";
+      float: right;
+      margin-left: 5px;
+    }
+    /* Hover highlight */
+    .dropdown-menu .dropdown-item:hover,
+    .dropdown-menu .nav-link:hover {
+      background-color: #fdc632;
+      color: #000;
+    }
+    /* Uniform dropdown styling */
+    .navbar-nav .dropdown-menu,
+    .navbar-nav .dropdown-submenu .dropdown-menu {
+      min-width: 220px;
+    }
+    .navbar-nav .dropdown-menu .dropdown-item,
+    .navbar-nav .dropdown-menu .nav-link {
+      font-size: 15px;
+      white-space: nowrap;
+      padding: 8px 15px;
+    }
+    /* Line separators */
+    .navbar-nav .dropdown-menu .dropdown-item {
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+    }
+    .navbar-nav .dropdown-menu > li:last-child > .dropdown-item,
+    .navbar-nav .dropdown-submenu .dropdown-menu > li:last-child > .dropdown-item {
+      border-bottom: none;
+    }
 
-/* Add custom arrow to submenu items only */
-.dropdown-submenu > a::after {
-  content: " ▸";
-  float: right;
-  margin-left: 5px;
-}
+    /* -------- WhatsApp Floating Button -------- */
+    #whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 9999;
+      transition: background-color 0.3s ease;
+    }
+    #whatsapp-button:hover {
+      background-color: #1ebe57;
+    }
 
-/* Highlight dropdown items on hover */
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .nav-link:hover {
-  background-color: #fdc632; /* Yellow (Bootstrap warning color) */
-  color: #000; /* Black text for contrast */
-}
+    /* -------- Footer Spacing -------- */
+    footer.footer-area {
+      padding-top: 15px !important;
+      padding-bottom: 15px !important;
+    }
+    .footer-area .container {
+      max-width: 1100px;
+    }
+    .footer-area .single-footer-widget {
+      margin-bottom: 10px !important;
+    }
+    .footer-area .footer-bottom {
+      margin-top: 10px !important;
+      padding-top: 10px;
+      padding-bottom: 5px;
+    }
+    .footer-area .footer-links {
+      padding: 0;
+      margin: 0;
+    }
+    .footer-area .footer-links li {
+      list-style: none;
+      margin-bottom: 5px;
+    }
+    .footer-area .footer-links li a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .footer-area .footer-links li a:hover {
+      color: #fdc632;
+    }
+    .quick-links-heading {
+      text-align: center;
+      margin-left: -60px;
+    }
 
-/* ===== Uniform dropdown styling for Services & Countries ===== */
-.navbar-nav .dropdown-menu,
-.navbar-nav .dropdown-submenu .dropdown-menu {
-  min-width: 220px;      /* uniform width */
-}
-
-.navbar-nav .dropdown-menu .dropdown-item,
-.navbar-nav .dropdown-menu .nav-link {
-  font-size: 15px;       /* same font size */
-  white-space: nowrap;   /* keep text in one line */
-  padding: 8px 15px;     /* same padding */
-}
-/* Add line separator between dropdown items */
-/* Add line separator between all dropdown items */
-.navbar-nav .dropdown-menu .dropdown-item {
-  border-bottom: 1px solid #ddd;
-  padding: 8px 15px;
-  font-size: 18px;
-}
-
-/* Remove border for last visible item in each dropdown */
-.navbar-nav .dropdown-menu > li:last-child > .dropdown-item {
-  border-bottom: none;
-}
-
-/* Optional: remove border for nested submenu last items */
-.navbar-nav .dropdown-submenu .dropdown-menu > li:last-child > .dropdown-item {
-  border-bottom: none;
-}
-
-/* WhatsApp Floating Button */
-
-  #whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    text-align: center;
-    line-height: 60px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
-    z-index: 9999;
-    transition: background-color 0.3s ease;
-  }
-
-  #whatsapp-button:hover {
-    background-color: #1ebe57;
-  }
-
-footer.footer-area {
-  padding-top: 15px !important;   /* Reduce top padding */
-  padding-bottom: 15px !important; /* Reduce bottom padding */
-}
-
-.footer-area .container {
-  max-width: 1100px;  /* Reduce max width if needed */
-}
-
-.footer-area .single-footer-widget {
-  margin-bottom: 10px !important;  /* Reduce spacing between widgets */
-}
-
-.footer-area .footer-bottom {
-  margin-top: 10px !important;  /* Reduce bottom margin */
-  padding-top: 10px; /* optional */
-  padding-bottom: 5px; /* optional */
-}
-.footer-area .footer-links {
-  padding: 0;
-  margin: 0;
-}
-
-.footer-area .footer-links li {
-  list-style: none;
-  margin-bottom: 5px; /* spacing between links */
-}
-
-.footer-area .footer-links li a {
-  color: white;
-  text-decoration: none;
-  display: inline-block; /* ensures proper alignment */
-}
-
-.footer-area .footer-links li a:hover {
-  color: #fdc632;
-}
-.quick-links-heading {
-    text-align: center;  /* keep it centered overall */
-    margin-left: -60px;  /* nudge slightly left */
-}
-
-
-
-</style>
+    /* -------- Mobile Dropdown Fix -------- */
+    @media (max-width: 991px) {
+      .dropdown-submenu > .dropdown-menu {
+        position: static;
+        margin-left: 0;
+        display: none;
+      }
+      .dropdown-submenu.show > .dropdown-menu {
+        display: block;
+      }
+      .dropdown-submenu > a::after {
+        content: " ▼";
+      }
+    }
+  </style>
 </head>
-  <body>
-    <!--================ Start Header Menu Area =================-->
-    <header class="header_area">
-      <div class="main_menu">
-        <div class="search_input" id="search_input_box">
-          <div class="container">
-            <form class="d-flex justify-content-between" method="GET" action="{% url 'search' %}">
-  <input
-    type="text"
-    name="q"
-    class="form-control"
-    id="search_input"
-    placeholder="Search Here"
-  />
-  <button type="submit" class="btn"><i class="ti-search"></i></button>
-  <span class="ti-close" id="close_search" title="Close Search"></span>
-</form>
+<body>
+  <!-- ========== HEADER ========== -->
+  <header class="header_area">
+    <div class="main_menu">
 
+      <!-- Search Box -->
+      <div class="search_input" id="search_input_box">
+        <div class="container">
+          <form class="d-flex justify-content-between" method="GET" action="{% url 'search' %}">
+            <input type="text" name="q" class="form-control" id="search_input" placeholder="Search Here" />
+            <button type="submit" class="btn"><i class="ti-search"></i></button>
+            <span class="ti-close" id="close_search" title="Close Search"></span>
+          </form>
+        </div>
+      </div>
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+
+          <!-- Logo -->
+          <a class="navbar-brand logo_h" href="{% url 'index' %}">
+            <img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad"/>
+          </a>
+
+          <!-- Mobile toggle button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <!-- Menu Items -->
+          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto">
+
+              <!-- Home -->
+              <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+              </li>
+
+              <!-- About -->
+              <li class="nav-item {% if request.resolver_match.url_name == 'about-us' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'about' %}">About Us</a>
+              </li>
+
+              <!-- Blog -->
+              <li class="nav-item {% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+              </li>
+
+              <!-- Services Dropdown -->
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Services ⮟</a>
+                <ul class="dropdown-menu">
+                  {% for category, services in services_by_category.items %}
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">{{ category }} ➤</a>
+                    <ul class="dropdown-menu">
+                      {% for service in services %}
+                      <li><a class="dropdown-item" href="{% url 'service_detail' service.slug %}">{{ service.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <!-- Countries Dropdown -->
+              <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Countries ⮟</a>
+                <ul class="dropdown-menu">
+                  {% for country in countries %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'country_detail' country.slug %}">{{ country.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <!-- Contact -->
+              <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+              </li>
+
+              <!-- Search Icon -->
+              <li class="nav-item">
+                <a href="#" class="nav-link search" id="search"><i class="ti-search"></i></a>
+              </li>
+            </ul>
           </div>
         </div>
+      </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand logo_h" href="{% url 'index' %}"
-              ><img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad"
-            /></a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="icon-bar"></span> <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div
-              class="collapse navbar-collapse offset"
-              id="navbarSupportedContent"
-            >
-              <ul class="nav navbar-nav menu_nav ml-auto">
-                <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-  <a class="nav-link" href="{% url 'index' %}">Home</a>
-</li>
+    </div>
+  </header>
+  <!-- ========== END HEADER ========== -->
 
-<li class="nav-item {% if request.resolver_match.url_name == 'about-us' %}active{% endif %}">
-  <a class="nav-link" href="{% url 'about' %}">About Us</a>
-</li>
-                <li class="nav-item {% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
-  <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-</li>
-              <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-    Services ⮟
-  </a>
-  <ul class="dropdown-menu">
-    {% for category, services in services_by_category.items %}
-      <li class="dropdown-submenu">
-        <a class="dropdown-item dropdown-toggle" href="#">
-          {{ category }} ➤
-        </a>
-        <ul class="dropdown-menu">
-          {% for service in services %}
-            <li><a class="dropdown-item" href="{% url 'service_detail' service.slug %}">{{ service.name }}</a></li>
-          {% endfor %}
-        </ul>
-      </li>
-    {% endfor %}
-  </ul>
-</li>
+  <!-- Page Content -->
+  {% block content %}{% endblock %}
 
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer-area section_gap">
+    <div class="container">
+      <div class="row">
 
-                <li class="nav-item submenu dropdown">
-                  <a
-                    href="#"
-                    class="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Countries ⮟</a
-                  >
-                  <ul class="dropdown-menu">
-    {% for country in countries %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'country_detail' country.slug %}">
-            {{ country.name }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+        <!-- Logo & tagline -->
+        <div class="col-lg-4 col-md-6 single-footer-widget">
+          <a class="navbar-brand logo_h" href="{% url 'index' %}">
+            <img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad"/>
+          </a>
+          <p>Your trusted partner in achieving global education goals!</p>
+        </div>
 
-                </li>
-             <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-  <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-</li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link search" id="search">
-                    <i class="ti-search"></i>
-                  </a>
-                </li>
+        <!-- Quick Links -->
+        <div class="col-lg-6 col-md-6">
+          <h4 class="mb-3 quick-links-heading">Quick Links</h4>
+          <div class="row">
+            <div class="col-4">
+              <ul class="footer-links list-unstyled">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="footer-links list-unstyled">
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'index' %}">Services</a></li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="footer-links list-unstyled">
+                <li><a href="{% url 'index' %}">Countries</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
               </ul>
             </div>
           </div>
-        </nav>
+        </div>
+
       </div>
-    </header>
-   <!-- End header -->
-    {% block content %}
-    {% endblock %}
-     <!-- Start Footer -->
 
-   <footer class="footer-area section_gap">
-  <div class="container">
-    <div class="row">
-      <!-- Logo & tagline -->
-      <div class="col-lg-4 col-md-6 single-footer-widget">
-        <a class="navbar-brand logo_h" href="{% url 'index' %}">
-          <img src="{% static 'img/banner/logo4.jpg' %}" alt="Royal Pearl Study Abroad" />
-        </a>
-        <p>Your trusted partner in achieving global education goals!</p>            
-      </div>         
-
-      <!-- Quick Links -->
-      <!-- Quick Links -->
-<div class="col-lg-6 col-md-6 ">
-  <h4 class="mb-3 quick-links-heading">Quick Links</h4>
-  <div class="row">
-    <div class="col-4">
-      <ul class="footer-links list-unstyled">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-      </ul>
-    </div>
-    <div class="col-4">
-      <ul class="footer-links list-unstyled">
-        <li><a href="{% url 'blog' %}">Blog</a></li>
-        <li><a href="{% url 'index' %}">Services</a></li>
-      </ul>
-    </div>
-    <div class="col-4">
-      <ul class="footer-links list-unstyled">
-        <li><a href="{% url 'index' %}">Countries</a></li>
-        <li><a href="{% url 'contact' %}">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-    </div>
-
-    <!-- Bottom -->
-    <div class="row footer-bottom d-flex justify-content-between">
-      <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
-        All rights reserved | This site is made with <i class="ti-heart" aria-hidden="true"></i> 
-        by <a href="https://gocosys.com" target="_blank"> Gocosys &amp; Jeena</a>
-      </p>
-
-      <div class="col-lg-4 col-sm-12 footer-social">
-        <a href="https://www.facebook.com/profile.php?id=61578094118441&mibextid=qi2Omg"><i class="ti-facebook"></i></a>
-        <a href="https://www.royalpearltravels.com" target="_blank"><i class="ti-dribbble"></i></a>
-        <a href="https://www.instagram.com/royalpearl_travels"><i class="ti-instagram"></i></a>
+      <!-- Footer Bottom -->
+      <div class="row footer-bottom d-flex justify-content-between">
+        <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+          Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
+          All rights reserved | Made with <i class="ti-heart" aria-hidden="true"></i> 
+          by <a href="https://gocosys.com" target="_blank">Gocosys & Jeena</a>
+        </p>
+        <div class="col-lg-4 col-sm-12 footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61578094118441&mibextid=qi2Omg"><i class="ti-facebook"></i></a>
+          <a href="https://www.royalpearltravels.com" target="_blank"><i class="ti-dribbble"></i></a>
+          <a href="https://www.instagram.com/royalpearl_travels"><i class="ti-instagram"></i></a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+  <!-- ========== END FOOTER ========== -->
 
-    <!--================ End footer Area  end=================-->
-    <!-- WhatsApp -->
-<a href="https://wa.me/918807440944" target="_blank" id="whatsapp-button" title="Chat with us on WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-</a>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/918807440944" target="_blank" id="whatsapp-button" title="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'vendors/nice-select/js/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/owl-carousel-thumb.min.js' %}"></script>
-    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
-    <script src="{% static 'js/mail-script.js' %}"></script>
-    <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    <script src="{% static 'js/gmaps.min.js' %}"></script>
-    <script src="{% static 'js/theme.js' %}"></script>
-    <!-- Font Awesome CDN for WhatsApp icon -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function () {
-    // Top-level dropdown hover
-    $('.nav-item.dropdown').hover(
-      function () {
-        $(this).addClass('show');
-        $(this).find('> .dropdown-menu').addClass('show');
-      },
-      function () {
-        $(this).removeClass('show');
-        $(this).find('> .dropdown-menu').removeClass('show');
+  <!-- ========== JAVASCRIPT FILES ========== -->
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vendors/nice-select/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/owl-carousel-thumb.min.js' %}"></script>
+  <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'js/mail-script.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+  <script src="{% static 'js/gmaps.min.js' %}"></script>
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- ========== CUSTOM SCRIPT FOR DROPDOWNS ========== -->
+  <script>
+    $(document).ready(function () {
+      function isMobile() {
+        return $(window).width() <= 991;
       }
-    );
-
-    // Submenu hover
-    $('.dropdown-submenu').hover(
-      function () {
-        $(this).addClass('show');
-        $(this).find('> .dropdown-menu').addClass('show');
-      },
-      function () {
-        $(this).removeClass('show');
-        $(this).find('> .dropdown-menu').removeClass('show');
-      }
-    );
-  });
-</script>
-
-
-
-
-
- </body>
+      // Desktop hover
+      $('.nav-item.dropdown').hover(
+        function () {
+          if (!isMobile()) {
+            $(this).addClass('show').find('> .dropdown-menu').addClass('show');
+          }
+        },
+        function () {
+          if (!isMobile()) {
+            $(this).removeClass('show').find('> .dropdown-menu').removeClass('show');
+          }
+        }
+      );
+      // Submenu toggle (mobile)
+      $('.dropdown-submenu > a').on("click", function (e) {
+        var submenu = $(this).next('.dropdown-menu');
+        if (isMobile()) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).closest('.dropdown-menu').find('.dropdown-menu').slideUp().parent().removeClass('show');
+          submenu.slideToggle().parent().toggleClass('show');
+        }
+      });
+    });
+  </script>
+</body>
 </html>

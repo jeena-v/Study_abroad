@@ -4,8 +4,8 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from django.db.models import Q
 from .forms import ContactForm, CounsellorMessageForm
+from .models import AboutDetail, AboutStat, TeamMember, Testimonial
 
-# Create your views here.
 
 def index(request):
     return render(request,'study_abroad_app/index.html')
@@ -14,12 +14,8 @@ def about(request):
     about_data = AboutPage.objects.first()  # Fetch first (only) record
     return render(request, 'study_abroad_app/about.html', {'about_data': about_data})
 
-
 def blog(request):
     return render(request,'study_abroad_app/blog.html')
-
-def courses(request):
-    return render(request,'study_abroad_app/courses.html')
 
 def contact(request):
     if request.method == 'POST':
@@ -31,7 +27,7 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'study_abroad_app/contact.html', {'form': form})
-from django.shortcuts import redirect, render
+
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import CounsellorMessageForm, CounsellingPopupForm
@@ -96,8 +92,7 @@ def counselling_popup(request):
     return redirect('index')
 
 
-from django.shortcuts import render, get_object_or_404
-from .models import AboutPage, BlogPost, BlogCategory, CountryPage,  Service
+from .models import AboutPage, BlogPost, BlogCategory, CountryPage,  Service, WhyChooseUsPoint
 
 def blog_list(request):
     posts = BlogPost.objects.all().order_by('-published_date')
@@ -138,8 +133,19 @@ def search_view(request):
     })
 
 def about_details(request):
-    return render(request, 'study_abroad_app/about-details.html')
+    about = AboutDetail.objects.last()  # latest entry
+    stats = AboutStat.objects.all()
+    team = TeamMember.objects.all()
+    testimonials = Testimonial.objects.all()
+    why_choose_points = WhyChooseUsPoint.objects.filter(about=about)  # get points for this AboutDetail
 
+    return render(request, "study_abroad_app/about-details.html", {
+        "about": about,
+        "stats": stats,
+        "team": team,
+        "testimonials": testimonials,
+        "why_choose_points": why_choose_points,  # pass to template
+    })
 
 
 def country_detail(request, slug):

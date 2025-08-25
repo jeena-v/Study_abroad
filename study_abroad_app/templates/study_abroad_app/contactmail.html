@@ -1,19 +1,15 @@
 {% autoescape off %}
-
 Hello,
 
-You Got a Enquire in Website name
+You have received a new enquiry from your website.
 
-customer details:
+Customer Details:
+-----------------
+Name: {{ name }}
+Phone No: {{ phoneno }}
+Email: {{ email }}
+Message: 
+{{ message }}
 
-Name: {{name}}
-Phone No: {{phoneno}}
-Email : {{email}}
-Message: {{message}}
-
-Thank you !
-
-
-
+Thank you!
 {% endautoescape %}
-

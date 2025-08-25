@@ -1,18 +1,21 @@
-{% extends 'study_abroad_app/base.html'%}
+{% extends 'study_abroad_app/base.html' %}
 {% load static %}
 {% block content %} 
-<style>
-   .primary-btn {
-    background-color: #ff6600 !important;
-    color: #fff !important;
-    border: none;
-  }
 
-  .primary-btn:hover {
-    background-color: #e65500 !important; /* Slightly darker orange on hover */
-    color: #fff !important;
-  }
-  
+<!-- ===================== STYLES ===================== -->
+<style>
+/* ================= BUTTONS ================= */
+.primary-btn {
+  background-color: #ff6600 !important;
+  color: #fff !important;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #e65500 !important; /* Slightly darker orange on hover */
+  color: #fff !important;
+}
+
 /* ================= INFO BOXES ================= */
 .info-box {
   background: #f9f9f9;
@@ -20,7 +23,7 @@
   border-radius: 20px;
   margin-bottom: 30px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  border: 3px solid rgba(255, 102, 0, 0.4); /* ✅ original orange border */
+  border: 3px solid rgba(255, 102, 0, 0.4); /* Orange border */
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
@@ -30,7 +33,6 @@
   box-shadow: 0 4px 25px rgba(0,0,0,0.08), 0 0 0 4px rgba(255,102,0,0.5);
   transform: translateY(-3px);
 }
-
 
 .info-box::before {
   content: '';
@@ -64,6 +66,13 @@
   line-height: 1.7;
   position: relative;
   z-index: 2;
+}
+
+/* Add subtle icon before each info box title */
+.info-box h2::before {
+  content: "★";
+  margin-right: 10px;
+  color: #ff6600;
 }
 
 /* ================= COUNSELLING BOX ================= */
@@ -116,7 +125,7 @@
   color: #e65c00;
 }
 
-/* Responsive */
+/* Responsive layout for counselling box */
 @media (max-width: 600px) {
   .counselling_box {
     flex-direction: column;
@@ -170,6 +179,7 @@
   color: #ff6600;
 }
 
+/* Form fields inside modal */
 .enquire_form input,
 .enquire_form textarea {
   width: 100%;
@@ -195,104 +205,66 @@
   background: #e65c00;
 }
 
-
-
 /* ================= EXTRA ENHANCEMENTS ================= */
-
-/* Add subtle icon before each info box title */
-.info-box h2::before {
-  content: "★";
-  margin-right: 10px;
-  color: #ff6600;
-}
-
 /* Smooth transition for all hover effects */
 * {
   transition: all 0.3s ease;
 }
 </style>
-    <!--================ End Header Menu Area =================-->
 
-    <!--================Home Banner Area =================-->
-    <!-- <section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6">
-              <div class="banner_content text-center">
-                <h2>About Us</h2>
-                <div class="page_link">
-                  <a href="index.html">Home</a>
-                  <a href="about-us.html">About Us</a>
-                </div>
-              </div>
-            </div>
-          </div>
+<!-- ================= ABOUT SECTION ================= -->
+<section class="about_area section_gap">
+  <div class="container">
+    <div class="row h_blog_item">
+      <!-- Image Column -->
+      <div class="col-lg-6">
+        <div class="h_blog_img">
+          <img class="img-fluid" src="{% static 'img/img9.jpg' %}" alt="About Royal Pearl Study Abroad" />
         </div>
       </div>
-    </section> -->
-    <!--================End Home Banner Area =================-->
-
-    <!--================ Start About Area =================-->
-    <section class="about_area section_gap">
-      <div class="container">
-        <div class="row h_blog_item">
-          <div class="col-lg-6">
-            <div class="h_blog_img">
-              <img class="img-fluid" src="{% static 'img/img9.jpg' %}" alt="" />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="h_blog_text">
-              <div class="h_blog_text_inner left right">
-                <h4>Welcome to Royal Pearl Study Abroad</h4>
-                <p>
-                    As the global education landscape evolved,
-                    it became evident that students required more than just basic guidance. 
-                    Recognizing this growing need, Royal Pearl Study Abroad was established to offer complete, 
-                    personalized support for every step of the study abroad journey. 
-                    From course selection to visa processing and beyond, 
-                    our mission is to ensure students receive expert assistance and care from the moment they dream of studying overseas to the day they reach their destination.</p>
-                                    
-                
-                 <a class="primary-btn mt-3" href="{% url 'about-details' %}">
+      <!-- Text Column -->
+      <div class="col-lg-6">
+        <div class="h_blog_text">
+          <div class="h_blog_text_inner left right">
+            <h4>Welcome to Royal Pearl Study Abroad</h4>
+            <p>
+              As the global education landscape evolved, it became evident that students required more than just basic guidance. 
+              Recognizing this growing need, Royal Pearl Study Abroad was established to offer complete, personalized support for every step of the study abroad journey. 
+              From course selection to visa processing and beyond, our mission is to ensure students receive expert assistance and care from the moment they dream of studying overseas to the day they reach their destination.
+            </p>
+            <a class="primary-btn mt-3" href="{% url 'about-details' %}">
               Learn More <i class="ti-arrow-right ml-1"></i>
             </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-  <h1 style="text-align: center; margin-top: 10px; margin-bottom: -21px;">{{ about_data.title }}</h1>
+    </div>
+    <!-- Dynamic About Title -->
+    <h1 class="text-center mt-3 mb-0">{{ about_data.title }}</h1>
+  </div>
+</section>
 
-    </section>
-
- <section class="container section-gap">
-     
+<!-- ================= INFO BOXES SECTION ================= -->
+<section class="container section-gap">
   <div class="info-box">
     <h2>About Us</h2>
     <p>{{ about_data.about_content|linebreaks }}</p>
   </div>
-
   <div class="info-box">
     <h2>Our Mission</h2>
     <p>{{ about_data.mission|linebreaks }}</p>
   </div>
-
   <div class="info-box">
     <h2>Our Vision</h2>
     <p>{{ about_data.vision|linebreaks }}</p>
-
   </div>
-   <div class="info-box">
+  <div class="info-box">
     <h2>Why Choose Us</h2>
-  <p>{{ about_data.why_choose_us|linebreaks }}</p>
-
+    <p>{{ about_data.why_choose_us|linebreaks }}</p>
   </div>
-
 </section>
- 
+
+<!-- ================= COUNSELLING BOX ================= -->
 <section class="counselling_session_area">
   <div class="counselling_box">
     <h2>Avail A Complementary Counselling Session</h2>
@@ -300,57 +272,58 @@
   </div>
 </section>
 
-
-<!-- ✅ POPUP MODAL -->
+<!-- ================= MODAL POPUP ================= -->
 <div id="enquireModal" class="modal">
   <div class="modal_content">
     <span class="close" id="closePopup">&times;</span>
     <h3>Book Your Free Counselling Session</h3>
+
+    <!-- Display success messages -->
     {% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-success">{{ message }}</div>
-  {% endfor %}
-{% endif %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Enquiry Form -->
     <form method="POST" action="{% url 'counselling_popup' %}" class="enquire_form">
-  {% csrf_token %}
-
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <input type="text" name="phone" placeholder="Your Phone" required>
-  <textarea name="message" placeholder="Your Message" rows="3" required></textarea>
-
-  <button type="submit" class="submit_btn">Submit</button>
-</form>
-
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="phone" placeholder="Your Phone" required>
+      <textarea name="message" placeholder="Your Message" rows="3" required></textarea>
+      <button type="submit" class="submit_btn">Submit</button>
+    </form>
   </div>
 </div>
+
+<!-- ================= MODAL SCRIPT ================= -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const openBtn = document.getElementById('openPopup');
-    const closeBtn = document.getElementById('closePopup');
-    const modal = document.getElementById('enquireModal');
+document.addEventListener('DOMContentLoaded', function () {
+  const openBtn = document.getElementById('openPopup');
+  const closeBtn = document.getElementById('closePopup');
+  const modal = document.getElementById('enquireModal');
 
-    if(openBtn && closeBtn && modal){
-      openBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        modal.style.display = 'block';
-      });
+  if (openBtn && closeBtn && modal) {
+    // Open modal
+    openBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      modal.style.display = 'block';
+    });
 
-      closeBtn.addEventListener('click', function(){
+    // Close modal
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target == modal) {
         modal.style.display = 'none';
-      });
-
-      window.addEventListener('click', function(event){
-        if(event.target == modal){
-          modal.style.display = 'none';
-        }
-      });
-    }
-  });
+      }
+    });
+  }
+});
 </script>
 
-   
-
-    <!--================ Start footer Area  =================-->
-    {% endblock %}
-  
+{% endblock %}

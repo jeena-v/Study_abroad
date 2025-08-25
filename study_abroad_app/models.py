@@ -16,6 +16,50 @@ class AboutPage(models.Model):
 
     def __str__(self):
         return self.title
+    
+from django.db import models
+
+class AboutDetail(models.Model):
+    title = models.CharField(max_length=255, default="About Royal Pearl Study Abroad")
+    content = models.TextField()  # main about us content
+    mission = models.TextField(blank=True, null=True)
+    vision = models.TextField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+class WhyChooseUsPoint(models.Model):
+    about = models.ForeignKey(AboutDetail, on_delete=models.CASCADE, related_name="why_choose_us_points")
+    icon_class = models.CharField(max_length=50, help_text="e.g., flaticon-student")
+    text = models.TextField()
+
+
+class AboutStat(models.Model):
+    label = models.CharField(max_length=100)  # e.g. "Students Placed"
+    number = models.CharField(max_length=50)  # e.g. "500+"
+
+    def __str__(self):
+        return f"{self.number} {self.label}"
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=150)
+    photo = models.ImageField(upload_to="team/", blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Testimonial(models.Model):
+    text = models.TextField()
+    author = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.author
+
 
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100)
